@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador de Streaming</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 600px; margin: auto; padding: 20px; }
+        .total { font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container bg-white p-6 rounded shadow">
+        <h1 class="text-2xl font-bold mb-4">Cotizador de Combos de Streaming</h1>
+        <form id="cotizador">
+            <label class="block mb-2"><input type="checkbox" name="servicios" value="Netflix" data-precio="10"> Netflix ($10)</label>
+            <label class="block mb-2"><input type="checkbox" name="servicios" value="Amazon Prime" data-precio="8"> Amazon Prime ($8)</label>
+            <label class="block mb-2"><input type="checkbox" name="servicios" value="Disney+" data-precio="7"> Disney+ ($7)</label>
+            <label class="block mb-2"><input type="checkbox" name="servicios" value="HBO Max" data-precio="12"> HBO Max ($12)</label>
+            <div class="total text-xl mt-4">Total: $<span id="total">0</span></div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('cotizador').addEventListener('change', function() {
+            let total = 0;
+            const checkboxes = document.querySelectorAll('input[name="servicios"]:checked');
+            checkboxes.forEach(checkbox => {
+                total += parseFloat(checkbox.getAttribute('data-precio'));
+            });
+            document.getElementById('total').textContent = total.toFixed(2);
+        });
+    </script>
+</body>
+</html>
